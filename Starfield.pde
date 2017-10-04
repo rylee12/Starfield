@@ -2,7 +2,7 @@ Particle [] xian;
 void setup()
 {
   size(700, 700);
-  xian = new Particle[500];
+  xian = new Particle[1000];
   for (int i = 0; i < xian.length; i++)
   {
     xian[i] = new NormalParticle();
@@ -28,8 +28,9 @@ class NormalParticle implements Particle
   {
     dX = 350;
     dY = 350;
-    dSpeed = Math.random()*10;
+    dSpeed = (Math.random()*10)+1;
     dTheta = Math.random()*2*Math.PI;
+    myColor = color((int)(Math.random()*256), (int)(Math.random()*256), (int)(Math.random()*256));
   }
   public void move()
   {
@@ -37,11 +38,15 @@ class NormalParticle implements Particle
     dY = dY + Math.sin(dTheta) * dSpeed;*/
     dX += Math.cos(dTheta) * dSpeed;
     dY += Math.sin(dTheta) * dSpeed;
+    if (dX >= 1000 || dX <= -300)
+      dX = 350;
+    if (dY >= 1000 || dY <= -300)
+      dY = 350;
   }
   public void show()
   {
-    fill(255, 0, 0);
-    ellipse((float)dX, (float)dY, 7, 7);
+    fill(myColor);
+    ellipse((float)dX, (float)dY, 9, 3);
   }
 }
 interface Particle
@@ -55,7 +60,7 @@ class OddballParticle implements Particle
   OddballParticle()
   {
     dX2 = 250;
-    dY2 = 250;
+    dY2 = 350;
   }
   public void move()
   {
@@ -64,8 +69,9 @@ class OddballParticle implements Particle
   }
   public void show()
   {
+    noStroke();
     fill(0, 0, 255);
-    ellipse(dX2, dY2, 30, 30);
+    rect(dX2, dY2, 30, 30);
   }
 }
 class JumboParticle extends NormalParticle
