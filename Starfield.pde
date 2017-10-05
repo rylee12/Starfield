@@ -2,7 +2,7 @@ Particle [] xian;
 void setup()
 {
   size(700, 700);
-  xian = new Particle[1000];
+  xian = new Particle[1500];
   for (int i = 0; i < xian.length; i++)
   {
     xian[i] = new NormalParticle();
@@ -34,14 +34,34 @@ class NormalParticle implements Particle
   }
   public void move()
   {
-    /*dX = dX + Math.cos(dTheta) * dSpeed;
-    dY = dY + Math.sin(dTheta) * dSpeed;*/
     dX += Math.cos(dTheta) * dSpeed;
     dY += Math.sin(dTheta) * dSpeed;
-    if (dX >= 1000 || dX <= -300)
+    /*if (dX >= 1000 || dX <= -300) //makes stars go in 1-d line
       dX = 350;
-    if (dY >= 1000 || dY <= -300)
       dY = 350;
+    if (dY >= 1000 || dY <= -300)
+      dX = 350;
+      dY = 350;*/
+    if (dX >= 1000)
+    {
+      dX = 350;
+      dY = 350;
+    }
+    else if (dX <= -300)
+    {
+      dX = 350;
+      dY = 350;
+    }
+    else if (dY >= 1000)
+    {
+      dX = 350;
+      dY = 350;
+    }
+    else if (dY <= -300)
+    {
+      dX = 350;
+      dY = 350;
+    }
   }
   public void show()
   {
@@ -78,7 +98,7 @@ class JumboParticle extends NormalParticle
 {
 	public void show()
   {
-    fill(255);
+    fill((int)(Math.random()*256), (int)(Math.random()*256), (int)(Math.random()*256));
     ellipse((float)dX, (float)dY, 50, 50);
   }
 }
