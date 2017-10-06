@@ -2,7 +2,7 @@ Particle [] xian;
 void setup()
 {
   size(700, 700);
-  xian = new Particle[1500];
+  xian = new Particle[2000];
   for (int i = 0; i < xian.length; i++)
   {
     xian[i] = new NormalParticle();
@@ -42,6 +42,11 @@ class NormalParticle implements Particle
     if (dY >= 1000 || dY <= -300)
       dX = 350;
       dY = 350;*/
+    if (mousePressed)
+    {
+      dX += Math.cos(dTheta) * 2 * dSpeed;
+      dY += Math.sin(dTheta) * 2 * dSpeed;
+    }
     if (dX >= 1000)
     {
       dX = 350;
@@ -66,7 +71,7 @@ class NormalParticle implements Particle
   public void show()
   {
     fill(myColor);
-    ellipse((float)dX, (float)dY, 9, 3);
+    ellipse((float)dX, (float)dY, 9, 5);
   }
 }
 interface Particle
